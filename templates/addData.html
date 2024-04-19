@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Data</title>
+    <!-- Materialize CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <h3>Add Data</h3>
+        <form id="dataForm">
+            <div class="input-field">
+                <input type="text" id="name" name="name" required>
+                <label for="name">Name</label>
+            </div>
+            <div class="input-field">
+                <input type="number" id="value" name="value" required>
+                <label for="value">Value</label>
+            </div>
+            <button class="btn waves-effect waves-light" type="submit">Submit</button>
+        </form>
+    </div>
+
+    <!-- Materialize JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            // Initialize Materialize components
+            M.AutoInit();
+
+            // Handle form submission
+            $('#dataForm').submit(function (e) {
+                e.preventDefault(); // Prevent default form submission
+                var formData = {
+                    name: $('#name').val(),
+                    value: $('#value').val()
+                }; // Create an object with form data
+                // Make AJAX POST request to add_data route
+                $.ajax({
+                    url: '/add_data',
+                    method: 'POST',
+                    data: JSON.stringify(formData), // Convert form data to JSON
+                    contentType: 'application/json', // Specify content type as JSON
+                    success: function (response) {
+                        M.toast({ html: response.message }); // Display success message
+                        // Reset form fields
+                        $('#dataForm')[0].reset();
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(error); // Log any errors to the console
+                        M.toast({ html: 'An error occurred while adding data.' }); // Display error message
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+
+</html>
