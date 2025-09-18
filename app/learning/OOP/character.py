@@ -1,8 +1,11 @@
+from equipable_object import EquipableObject
 from item import Item
+from partEnum import Parts
+from typing import Dict, Tuple
 
 class Character:
     #Constructor method
-    def __init__(self, name, race, gender, age, weight, height, aura, money, title, hunger, thirst, sleep):
+    def __init__(self, name, race, gender, age, weight, height, aura, money, title, hunger, thirst, sleep, parts=Parts.get_basic_body()):
         self.name = name
         self.race = race
         self.gender = gender
@@ -15,7 +18,9 @@ class Character:
         self.hunger = hunger
         self.thirst = thirst
         self.sleep = sleep
-        self.inventory: Dict[str, Tuple[Item, int]] = {}
+        self.inventory: Dict[str, Tuple[Item, int]] = {}       
+        self.parts = parts
+        self.equipped_items: Dict[Parts, list[EquipableObject]] = {}
     
     def display_info(self):
         info = f"Name: {self.name}\n"
@@ -80,3 +85,22 @@ class Character:
         for item, item_amount in self.inventory.values():
             inventory_list += "-------\n"+ item.display_info( item_amount)
         return inventory_list
+    
+    def show_equipment(self):
+        if not self.equipped_items:
+            return "No items equipped."
+        equipped_list = f"Equipped Items for {self.name}:\n"
+        for part, items in self.equipped_items.items():
+            equipped_list += f"--- {part.name} ---\n"
+            for item in items:
+                equipped_list += item.display_info() + "\n"
+        return equipped_list
+    
+    def equip_item(self, equipable_item: EquipableObject):
+        if equipable_item.part not in self.parts:
+            return f"Cannot equip {equipable_item.name}. No such body part: {equipable_item.part.name}."
+        if equipable_item.part in self.equipped_items:
+            self.equipped_items[equipable_item.part].append(equipable_item)
+        else:
+            self.equipped_items[equipable_item.part] = [equipable_item]
+        return f"Equipped {equipable_item.name} to {equipable_item.part.name}."
