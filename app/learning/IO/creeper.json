@@ -1,0 +1,175 @@
+[
+    null,
+    {
+        "id": 2,
+        "members": [
+            {
+                "enemyId": 2,
+                "x": 264,
+                "y": 232,
+                "hidden": false
+            },
+            {
+                "enemyId": 5,
+                "x": 192,
+                "y": 216,
+                "hidden": false
+            },
+            {
+                "enemyId": 5,
+                "x": 192,
+                "y": 136,
+                "hidden": false
+            },
+            {
+                "enemyId": 1,
+                "x": 216,
+                "y": 280,
+                "hidden": true
+            },
+            {
+                "enemyId": 1,
+                "x": 184,
+                "y": 160,
+                "hidden": true
+            }
+        ],
+        "name": "Tzimitl",
+        "pages": [
+            {
+                "conditions": {
+                    "actorHp": 50,
+                    "actorId": 1,
+                    "actorValid": false,
+                    "enemyHp": 50,
+                    "enemyIndex": 0,
+                    "enemyValid": true,
+                    "switchId": 1,
+                    "switchValid": false,
+                    "turnA": 0,
+                    "turnB": 0,
+                    "turnEnding": false,
+                    "turnValid": false
+                },
+                "list": [
+                    {
+                        "code": 339,
+                        "indent": 0,
+                        "parameters": [
+                            0,
+                            0,
+                            174,
+                            -1
+                        ]
+                    },
+                    {
+                        "code": 0,
+                        "indent": 0,
+                        "parameters": []
+                    }
+                ],
+                "span": 0
+            }
+        ]
+    },
+    {
+        "id": 4,
+        "members": [
+            {
+                "enemyId": 10,
+                "x": 0,
+                "y": 200,
+                "hidden": false
+            },
+            {
+                "enemyId": 3,
+                "x": 280,
+                "y": 216,
+                "hidden": false
+            },
+            {
+                "enemyId": 10,
+                "x": 24,
+                "y": 256,
+                "hidden": false
+            }
+        ],
+        "name": "Tanjerrock + Otros",
+        "pages": [
+            {
+                "conditions": {
+                    "actorHp": 50,
+                    "actorId": 1,
+                    "actorValid": false,
+                    "enemyHp": 50,
+                    "enemyIndex": 0,
+                    "enemyValid": false,
+                    "switchId": 1,
+                    "switchValid": false,
+                    "turnA": 0,
+                    "turnB": 0,
+                    "turnEnding": false,
+                    "turnValid": false
+                },
+                "list": [
+                    {
+                        "code": 0,
+                        "indent": 0,
+                        "parameters": []
+                    }
+                ],
+                "span": 0
+            }
+        ]
+    },
+    {
+        "id": 5,
+        "members": [
+            {
+                "enemyId": 8,
+                "x": 160,
+                "y": 216,
+                "hidden": false
+            },
+            {
+                "enemyId": 3,
+                "x": 176,
+                "y": 296,
+                "hidden": false
+            },
+            {
+                "enemyId": 3,
+                "x": 176,
+                "y": 176,
+                "hidden": false
+            }
+        ],
+        "name": "Armado + Piedras",
+        "pages": [
+            {
+                "conditions": {
+                    "actorHp": 50,
+                    "actorId": 1,
+                    "actorValid": false,
+                    "enemyHp": 50,
+                    "enemyIndex": 0,
+                    "enemyValid": false,
+                    "switchId": 1,
+                    "switchValid": false,
+                    "turnA": 0,
+                    "turnB": 0,
+                    "turnEnding": false,
+                    "turnValid": false
+                },
+                "list": [
+                    {
+                        "code": 0,
+                        "indent": 0,
+                        "parameters": []
+                    }
+                ],
+                "span": 0
+            }
+        ]
+    }
+]

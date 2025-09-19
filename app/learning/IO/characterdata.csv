@@ -1,0 +1,6 @@
+id,created_at,name,race,gender,age,weight,height,aura,money,title,hunger,thrist,sleep
+1,2025-09-11 01:06:41+00,Gazz Leudos,Kanion,Masculino,21,42,100,400,10000,1,100,100,100
+2,2025-09-18 16:43:32.126763+00,Mayu,Pumiblu,Femenino,12,11,112,421,2500,Salvajita,100,100,100
+3,2025-09-18 16:44:40.190204+00,Aina Kalt,Orthys,Femenino,18,27,155,421,2500,Chamana Mañosa,100,100,100
+4,2025-09-18 16:45:39.24252+00,Laal Mubsadaar,Dendrolian,Femenino,22,19,168,421,2500,Aloe Picudo,100,100,100,
+4047,2025-09-18 16:51:56,Miri Vielakh,zi-bum,F,22,15,35,100,10000,Hackerosa Bipolar,100,100,100,{},"[<Parts.HEAD: ('Head', 100)>, <Parts.LEFT_ARM: ('Left Arm', 100)>, <Parts.RIGHT_ARM: ('Right Arm', 100)>, <Parts.TORSO: ('Torso', 100)>, <Parts.LEFT_LEG: ('Left Leg', 100)>, <Parts.RIGHT_LEG: ('Right Leg', 100)>]",{}

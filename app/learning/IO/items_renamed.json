@@ -1,0 +1,16 @@
+[
+    {
+        "name": "Salticubo",
+        "price": 2500,
+        "stat": null,
+        "modifier": 0,
+        "description": "Teletransportador"
+    },
+    {
+        "name": "Sopita Fria",
+        "price": 11,
+        "stat": "VIT",
+        "modifier": 12,
+        "description": "Restaura 12 de VIT"
+    }
+]

@@ -1,9 +1,11 @@
 from flask import Flask
 
+
 def create_app():
     app = Flask(__name__)
 
-    # Import the routes (ensure the order of imports avoids circular dependencies)
+    # Import the routes (ensure the order of imports avoids circular
+    # dependencies)
     from .home import home_blueprint
     from .addData import add_data_blueprint
 

@@ -1,0 +1,323 @@
+
+
+ Written By: BeakLimit
+
+ Written By: BeakLimit
+
+ Written By: BeakLimit
+
+ Written By: BeakLimit
+
+ Written By: BeakLimitGuerrero:
+
+No te dejes engañar por lo simples que parecen ser pues los Guerreros son duchos en el arte de la guerra y la aventura y se centran más en la eficiencia que en el poder.
+
+
+
+Los Guerreros son directos y se centran en los puntos débiles de los enemigos.
+
+Debido a que además suelen viajar bastante tienen cierta ventaja sobre terrenos peliagudos y pueden llegar a recuperar Estamina en mitad del combate tras salir de situaciones peligrosas.
+
+
+
+Son capaces de obtener información analizando campos de batalla y valoran estar preparados para no verse sorprendidos. Encajan en cualquier grupo con el que decidan viajar.
+
+
+
+
+Son un clásico, colecciónalos.
+
+
+
+
+Preferencias de Equipo:
+
+-
+
+
+
+Rangos de Competencia:
+
+1: Pipiolo: Automático.
+
+Un Guerrero novato, todavía tiene mucho que sufrir, pero lo sabe.
+
+*Mejoras:
+
+-Límite de FUE, DEF y AGI +1
+
+-El Guerrero puede dominar dos tipos diferentes de armas cuerpo a cuerpo de cualquier tamaño y un tipo de escudo. (Dominio de Armas y Escudos Rango 2).
+
+
+
+2: Apañado: 2.000 de EXP.
+
+El entrenamiento da sus frutitos, saben a sudor.
+
+*Mejoras:
+
+-Limite de VIT +2
+
+-Límites de FUE, DEF, DES y AGI +1
+
+-+ 3 LV para Sub Atributos de FUE, DEF o AGI (Reparte el bonus como gustes).
+
+3: Comprometido: 3.000 de EXP.
+
+Ha llegado la hora de elegir que clase de Guerrero quieres ser, tu forma de usar la violencia también te define.
+
+*Mejoras:
+
+-Acción +1.
+
+-Elige una habilidad de Guerrero gratis.
+
+-Puedes elegir una Senda de Guerrero.
+
+*Competencias:
+
+-Si un Guerrero sufre algún tipo de agarre o es retenido de forma física puede usar su Bonus por Rango (Guerrero) para facilitar su escapada a cambio de estamina.
+
+-A la hora de interactuar con el terreno un Guerrero puede tirar un dado de INT, SENS o IMG para deducir algo ventajoso sobre dicho terreno sin sufrir Reacción o Contra, pero podría hacerse una idea equivocada si falla...
+
+-Un Guerrero tiene conocimiento sobre armas y armaduras. Puede identificar datos de estas con tan solo superar una prueba de INT o SENS. Requiere una Acción y consume Est. Mental.
+
+4: Prometedor: 4.000 de EXP/Gana 2 batallas/Realiza 1viaje grande.
+
+Acostumbrándose al sonido del combate y desplazarse, a estas alturas un Guerrero prepara su cuerpo para futuros desafios, como un bote cerrado o las rebajas.
+
+*Mejoras:
+
+-Límite de VIT +2
+
+-Límite de FUE, DEF y AGI +1.
+
+-Estamina Física +10
+
+-El Guerrero puede dominar dos tipos de arma a Distancia.(Rango de Arma a distancia +2)
+
+*Competencias:
+
+-A la hora de interactuar con cualquier terreno peligroso, puedes tirar un dado para evitar sufrir sus consecuencias. Consume estamina pero no provoca Reacción o Contra.
+
+-Un Guerrero puede sumar su bonus por rango (Guerrero) para desviar ataques (Parrys/Parryas), si conoces la habilidad Parrylla la estamina que pierdes es la mitad.
+
+-Si logras desviar usando tus armas y atacas tras eso aprovecharás la inercia de tu movimiento para realizar un golpe crítico (No debes estar merodeando)
+
+-Si el Guerrero usa un arma que desconoce o un arma improvisada aunque no pueda aprovechar sus capacidades no necesitará usar tiradas de DES para calcular su daño.
+
+5: Experimentado: 5.000 EXP/
+
+Haber recibido más de un golpe no previsto ha enseñado a más de un guerrero a prepararse mejor... los que no han aprendido la lección han dejado de ser guerreros de una forma u otra.
+
+*Mejoras:
+
+-Límite de VIT +2.
+
+-Acción +1.
+
+-Carga Física +1.
+
+-Contrareacción +1.
+
+-Aceleración de Penalización de Cansancio -1.
+
+*
+
+-A la hora de aprender cosas relacionado con el Estilo del Luchador de forma autodidacta, el Guerrero empieza siempre desde el nivel: "Progresa Adecuadamente: 80"
+
+-Cada vez que el Guerrero sale del estado Vulnerable puede respirar en paz y recuperar Est. Física (Recupera tanta como indique su valor fíjo de Est. Física) y 5 de Est. Mental.
+
+-Si el Guerrero falla una prueba relacionada con moverse por terreno peliagudo, cada nuevo intento reduce la dificultad de la tirada en 5 (La dificultad máxima a la que puede reducirse la prueba es 5)
+
+-El Guerrero puede analizar, además de armas y armaduras, eventos relacionados con batallas para descubrir datos de interés para prepararse mejor de antemano. Para ello deberá superar una prueba de INT o SENS cuya dificultad no será mayor de 15.
+
+6: Profesional: 7.500 EXP/
+
+Los moratones y arañazos en las rodillas te han enseñado lo que es ser un autentico Guerreo
+
+*Mejoras:
+
+-Limite de FUE y DEF +2, Límite de DES y AGI +1.
+
+-Carga física +1
+
+-Elige 1 habilidad de guerrero gratis.
+
+-+ 3 LV para Sub Atributos de FUE, DEF o AGI (Reparte el bonus como gustes)..
+
+-Dominio de armas y escudos improvisados +2.
+
+-Aceleración de Penalización de Cansancio -1.
+
+*Competencias:
+
+-Sí alguien pone en duda tus capacidades, puedes usar tu Bonus de Rango (Guerrero) para realizar una prueba de ELO o EST para convencerlos (Consume estamina mental)
+
+-Han pulido sus movimientos y pueden levantarse usando cualquier tipo de armadura con una penalización del 25% de AGI en vez del 50%.
+
+-Una vez ha golpeado o reconocido un punto débil, un Guerrero sabe como echar sal la herida causando daño crítico en el primero de sus golpes.
+
+-El Guerrero puede dominar todos los tipos de armas físicas y escudos que aún no sabe usar. (Dominio de armas y escudos Rango 2).
+
+-El Guerrero puede sentir el aura -si no está oculta- de enemigos en rango medio, para hacerse una idea de a que se enfrenta e incluso puede descubrir cuál la fortaleza del rival si supera una prueba de 10 de SENS (El atributo más alto del enemigo).
+
+7: Curtido: 8.500 EXP/
+
+Tenéis historias para contar en una taberna para un buen rato, las malas experiencias que os han hecho más fuertes y las buenas experiencias que os han hecho decir: "Adoro mi trabajo" mientras estáis cubiertos de sangre (no necesariamente vuestra) están grabadas en vuestra alma.
+
+*Mejoras:
+
+-Límite VIT +5
+
+-Limite de  FUE y DEF +2, Límite de DES y AGI +1.
+
+-Estamina física +10.
+
+-Estamina Mental +10.
+
+-Domino de Armas elegidas +1 Rango.
+
+-Si un Guerrero es derribado puede tirar un dado de DES o AGI contra la AGI de su rival para agarrarlo y derribarlo también. Si conoce la habilidad Ukemi podrá usarla sin provocar Reacción o Contra.
+
+*Competencias:
+
+-Los eventos que puedan bajar vuestra cordura son la mitad de efectivos.
+
+-Reduce en 3 el costo de estamina al atacar.
+
+-Un Guerrero curtido sabe identificar habilidades y movimientos, cada vez en un mismo combate repitan uno contra dicho guerrero dispone de un bonus de 5 en la prueba que necesite para zafarse, añade 5 por cada repetición consecuente.
+
+-Las situaciones y ataques que drenen Estamina Física al guerrero tienen la mitad de efecto, sabe como resistirlas. (Han de ser cosas que el enemigo realice o habilidades que inflijan cansancio).
+
+-Golpear un punto débil o alguien en estado Vulnerable recupera Est. Mental. (En el caso de hacer un combo sólo lo recupera el primer golpe)
+
+-Si un Guerrero falla una tirada para escapar de una retención física o efecto de algún terreno adverso, puede volver a tirar para intentar escapar, se quedará con el resultado más favorable.
+
+8: Élite: 9.000 EXP/
+*Mejoras:
+
+-Límite VIT +10
+
+-Limite de FUE y DEF +3, Límite de DES y AGI +2.
+
+-Estamina física +20
+
+-Cansancio +10
+
+-+ 3 LV para Sub Atributos de FUE, DEF y AGI (Reparte el bonus como gustes).
+
+-Aceleración de Penalización de Cansancio -1.
+
+-Dominio de armas elegidas +2.
+
+*Competencias:
+
+-El primer ataque fallido de un Turno no gasta nada estamina.
+-El primer intento resistir un Estado alterado mental (Intimidación, Confusión, etc) Siempre tendrá una dificultad de 5 sin importar la dificultad original o el atributo del enemigo.
+
+-Un Guerrero que ha sido lanzado por los aires puede tirar un dado  de DES para intentar recuperarse y caer atacando (No se incluye daño por peso). Si posee la habilidad Recuperación Aérea no recibirá daño por las caídas altas.
+
+-Si un Guerrero falla la tirada para recuperarse o disminuir un estado alterado físico, puede volver a tirar para zafarse, se queda con el resultado más favorable.
+
+-Cada vez que un Guerrero logre evitar un ataque de cualquier manera a excepción de escudos, con una diferencia en la tirada de 8 o superior, tiene la oportunidad de contra-atacar sin causar Reacción o Contra, añadiendo además daño crítico.
+
+-Golpear algo catalogado como "Punto Débil" o realizar una acción útil en la resolución de un evento motiva a un Guerrero dándole un bonus de +5 en DET para el resto del combate o situación donde se encuentre.
+
+-Un Guerrero no gasta estamina intentando evitar ataques repetidos de forma consecutiva (Te lanzan como 3 bolas de fuego seguidas, sólo evitar la primera costará estamina)
+
+9: Maestro: Conviértete en Maestro.
+
+-
+
+10:Piña: La verdad llegará a ti.
+
+-
+
+Habilidades Generales:
+
+A la carga:
+
+Aprender: 3.000 EXP.
+Coste: Est. Física x3.
+Un ataque cargado (no importa cuanto) fuerza al rival con un gran impacto a superar una prueba de EQU contra tu FUE, si falla se verá desplazado hacía atrás un rango de distancia.
+
+
+
+Parrillear:
+
+Aprender: 4.000 EXP.
+Coste: Est. Física x2.
+Desvía un ataque y deja al rival Vulnerable. Para que está habilidad funcione necesitas superar una prueba de AGI y DES superando ambas la AGI de tu enemigo. No es fácil pero tu enemigo tendrá una penalización a la AGI del 75% para defenderse una vez quede Vulnerable.
+
+
+Ukemi: 
+
+Aprender: 4.000 EXP.
+
+Coste: Est. Física x2.
+
+Te permite tirar un dado de DES o EQU para levantarte de nuevo antes de tocar el suelo y anular un derribo.
+
+
+Recuperación Aérea:
+
+Aprender: 4.000 EXP.
+
+Coste: Est. Física x2.
+
+Te permite tirar un dado de DES o EQU al lanzado por los aires para realizar una pirueta y caer de píe.
+
+
+Floritura Deluxe:
+
+Aprender: 4.000 EXP.
+Coste: Est. Física.
+Usa una acción antes de atacar o hacer un combo para confundir a tu enemigo añadir un +5 de dificultad a la siguiente Prueba de Atributo que deba superar.
+Para que la Floritura Deluxe se de por éxtiosa deberás superar una prueba de DES o EST contra la INT, o DES del rival.
+
+
+
+Revancha sorpresa: 
+Aprender: 4.000 EXP.
+Coste: Est. Física x2.
+Tipo: Estado.
+Duración: Hasta caer inconsciente.
+
+Se levanta de nuevo tras ser derrotado con 5 de VIT.Puedes usarla tantas veces como quieras, la primera siempre funciona, pero a partir de la segunda, será necesario que hayan pasado 4 turnos.
+
+Puede mejorarse la VIT con la que despiertas +1.
+*No funciona contra golpes Antidefensas.
+
+
+Fortalecimiento: 
+Aprender: 6.000 EXP.
+Coste: Est. Física x2.
+Tipo: Estado.
+Duración: 4 Turnos.
+Mejora: 3.000 EXP.
+
+Aumenta la FUE +5.
+
+La mejora aumenta la bonificación +1, no se ve afectado por el límite.
+
+*No es acumulable.
+
+
+Endurecimiento:
+
+Aprender: 6.000 EXP.
+Coste: Est. Física x2.
+Tipo: Estado.
+Duración: 4 Turnos.
+Mejora: 3.000 EXP.
+
+Aumenta la DEF +5.
+
+La mejora aumenta la bonificación +1, se ve afectado por el límite.
+
+*No es acumulable.
+
+ Written By: BeakLimit
+
+ Written By: BeakLimit

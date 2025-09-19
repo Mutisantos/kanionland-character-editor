@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class Parts(Enum):
     HEAD = ("Head", 100)
     LEFT_ARM = ("Left Arm", 100)
@@ -23,10 +24,9 @@ class Parts(Enum):
     def get_enum_by_name(name: str):
         # next method works as a findFirst in java streams
         return next(filter(lambda part: part.name == name, Parts), None)
-        # The compression list alternative uses a for cycle 
+        # The compression list alternative uses a for cycle
         # return next((part for part in Parts if part.name == name), None)
-    
-    
+
     @staticmethod
     def get_basic_body():
         return [
@@ -37,4 +37,3 @@ class Parts(Enum):
             Parts.LEFT_LEG,
             Parts.RIGHT_LEG
         ]
-    

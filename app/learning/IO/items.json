@@ -1,0 +1,44 @@
+[
+    {
+        "name": "Salticubo",
+        "price": 2500,
+        "stat": null,
+        "modifier": 0,
+        "description": "Teletransportador"
+    },
+    {
+        "name": "Comida Fria",
+        "price": 11,
+        "stat": "VIT",
+        "modifier": 12,
+        "description": "Restaura 12 de VIT"
+    },
+    {
+        "name": "Galleta dura",
+        "price": 25,
+        "stat": "VIT",
+        "modifier": 12,
+        "description": "Restaura 12 de VIT"
+    },
+    {
+        "name": "Sopita Fria",
+        "price": 11,
+        "stat": "VIT",
+        "modifier": 12,
+        "description": "Restaura 12 de VIT"
+    },
+    {
+        "name": "Sopita Restauradora",
+        "price": 300,
+        "stat": "VIT",
+        "modifier": 12,
+        "description": "Restaura 300 de VIT"
+    },
+    {
+        "name": "Sopita Restauradora",
+        "price": 300,
+        "stat": "VIT",
+        "modifier": 12,
+        "description": "Restaura 300 de VIT"
+    }
+]
