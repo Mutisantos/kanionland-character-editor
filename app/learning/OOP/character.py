@@ -43,6 +43,16 @@ class Character:
         """Return a dictionary representation of the Character's attributes."""
         return self.__dict__.copy()
 
+    @property
+    def aura(self) -> int:
+        return self._aura
+
+    @aura.setter
+    def aura(self, value: int):
+        if (value <= self.aura):
+            raise ValueError("Aura cannot be lowered")
+        self._aura = value
+
     # Arrow notation states which type the method returns
     def display_info(self) -> str:
         info = f"Name: {self.name}\n"
