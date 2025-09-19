@@ -3,6 +3,7 @@ from item import Item
 from partEnum import Parts
 from weapon import Weapon
 from armor import Armor
+from typing import Optional, Tuple
 
 char_a = Character("Gazz Leudos", "Kanion", "M", 21, 42, 90,
                    430, 2500, "Frost Knight", 100, 100, 100)
@@ -82,8 +83,12 @@ equipable_tail = Armor(
 
 # Method Call
 print(char_a.display_info())
+try:
+    print(char_a.withdraw_money(3000))
+except ValueError as e:
+    print(f"Insufficient Funds: {e}")
+print(char_a.deposit_money(501))
 print(char_a.withdraw_money(300))
-print(char_a.deposit_money(500))
 print(char_a.update_hunger(30))
 print(char_a.update_thirst(-50))
 print(char_a.update_sleep(-20))
@@ -121,3 +126,11 @@ print(char_b.equip_item(equipable_helmet))
 # The body part exists and the character has it
 print(char_b.equip_item(equipable_tail))
 print(char_b.show_equipment())
+
+optional_a: Optional[Tuple[Item, int]] = char_a.has_item("Sopita Caliente")
+# The object will be None
+print(f"Optional A: {optional_a}")
+print(char_a.add_item(item_a, 10))
+optional_a: Optional[Tuple[Item, int]] = char_a.has_item("Sopita Caliente")
+# The object is the expected Tuple
+print(f"Optional A: {optional_a[0].name}, Amount: {optional_a[1]}")

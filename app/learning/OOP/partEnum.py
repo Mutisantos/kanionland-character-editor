@@ -1,4 +1,5 @@
 from enum import Enum
+from typing import Union
 
 
 class Parts(Enum):
@@ -21,7 +22,8 @@ class Parts(Enum):
         return self._name
 
     @staticmethod
-    def get_enum_by_name(name: str):
+    # With Union, the method can return either a Parts or None
+    def get_enum_by_name(name: str) -> Union['Parts', None]:
         # next method works as a findFirst in java streams
         return next(filter(lambda part: part.name == name, Parts), None)
         # The compression list alternative uses a for cycle
