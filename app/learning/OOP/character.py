@@ -33,7 +33,7 @@ class Character:
         self.money = money
         self.title = title
         self.hunger = hunger
-        self.thirst = thrist
+        self.thrist = thrist
         self.sleep = sleep
         self.parts = parts
         self.inventory: Dict[str, Tuple[Item, int]] = {}
@@ -48,10 +48,21 @@ class Character:
         return self._aura
 
     @aura.setter
+    # Using setter method as validations are performed on assignment
     def aura(self, value: int):
-        if (value <= self.aura):
+        # Handle initial assignment during __init__
+        if not hasattr(self, '_aura'):
+            self._aura = value
+            return
+        # For subsequent assignments, enforce the rule that aura cannot be lowered
+        if value <= self._aura:
             raise ValueError("Aura cannot be lowered")
         self._aura = value
+
+    @aura.deleter
+    # Using deleter decorator, blocking del operator
+    def aura(self):
+        raise AttributeError("Aura cannot be deleted")
 
     # Arrow notation states which type the method returns
     def display_info(self) -> str:
@@ -72,17 +83,23 @@ class Character:
     def update_hunger(self, amount):
         operation = "increased" if amount > 0 else "decreased"
         self.hunger = max(0, min(100, self.hunger + amount))
-        return f"Hunger level {operation} to: {self.hunger}"
+        return self.__base_state_reporter("Hunger", self.hunger, operation)
 
     def update_thirst(self, amount):
         operation = "increased" if amount > 0 else "decreased"
-        self.thirst = max(0, min(100, self.thirst + amount))
-        return f"Thirst level {operation} to: {self.thirst}"
+        self.thrist = max(0, min(100, self.thrist + amount))
+        return self.__base_state_reporter("Thirst", self.thrist, operation)
 
     def update_sleep(self, amount):
         operation = "increased" if amount > 0 else "decreased"
         self.sleep = max(0, min(100, self.sleep + amount))
-        return f"Sleep level {operation} to: {self.sleep}"
+        return self.__base_state_reporter("Sleep", self.sleep, operation)
+
+    # Double underscore state that the method is private
+    # Therefore, its scope is limited to the class
+    # Also, private methods know already that self is the first argument
+    def __base_state_reporter(self, stat, amount, operation) -> str:
+        return f"{stat} level {operation} to: {amount}"
 
     def add_item(self, item: Item, amount=1):
         new_amount = 0

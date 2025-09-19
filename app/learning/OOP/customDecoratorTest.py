@@ -1,9 +1,4 @@
 from character import Character
-from item import Item
-from partEnum import Parts
-from weapon import Weapon
-from armor import Armor
-from typing import Optional, Tuple
 
 
 def race_check(race: str):
