@@ -1,8 +1,11 @@
+# Each python file is treated as a module
+# Due to that, any file can be imported with their methods and classes
 from equipable_object import EquipableObject
 from item import Item
 from armor import Armor
 from weapon import Weapon
 from partEnum import Parts
+# From-Import statement allows to import only specific elements in module
 from typing import Dict, Tuple, Optional
 
 
@@ -60,7 +63,7 @@ class Character:
         self._aura = value
 
     @aura.deleter
-    # Using deleter decorator, blocking del operator
+    # Using deleter decorator, blocking "del" python operation
     def aura(self):
         raise AttributeError("Aura cannot be deleted")
 
