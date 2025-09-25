@@ -1,6 +1,7 @@
 # Measure time spent to execute a function
 import time
 import random
+import sys
 # With big O notation, we describe the time complexity of an algorithm
 # The notation ignores constants and lower order terms, focusing in the highest order term
 # Asintotic apporach focuses in the function behavior trend as it goes to infinity
@@ -25,11 +26,17 @@ def g(x):
 
 
 def recursive_fibonacci(nth):
+    initial_time = time.time()
     if (nth == 0):
         return 1
     if (nth == 1):
         return 1
-    return recursive_fibonacci(nth - 1) + recursive_fibonacci(nth - 2)
+    result = recursive_fibonacci(nth - 1) + recursive_fibonacci(nth - 2)
+    finish_time = time.time()
+    if (nth == 35):
+        print(
+            f"Recursive fibonacci time: {finish_time - initial_time}: {result:.2e}")
+    return result
 
 # Memoized approach defines a dictionary of previous calls to avoid redundant calculations
 # In this case, every call will store their result so the next call will not need to calculate it again
@@ -37,6 +44,8 @@ def recursive_fibonacci(nth):
 
 
 def memoized_fibonacci(nth):
+    # Increase the stack limit for recursive calls
+    sys.setrecursionlimit(10000)
     initial_time = time.time()
     memo = {1: 1, 2: 1}
 
@@ -51,6 +60,31 @@ def memoized_fibonacci(nth):
     return result
     # Recursive factorial requires n recursive calls
     # Therefore it has a time complexity of O(2^n): exponential growth
+
+
+def iterative_fibonacci(nth):
+    initial_time = time.time()
+    # Initialize the list to have nth slots to be filled
+    if nth <= 0:
+        return 0
+    if nth <= 2:
+        return 1
+    memo = [0] * (nth + 1)
+    memo[1] = 1
+    memo[2] = 1
+    # Memo knows the previous calls, so it can avoid redundant calculations
+    # Newer results keep building the memo until reaching the desired result
+    for i in range(3, nth + 1):
+        memo[i] = memo[i - 1] + memo[i - 2]
+
+    result = memo[nth]
+    finish_time = time.time()
+    print(
+        f"Tiempo de fibonacci iterativo: {finish_time - initial_time}: {result:.2e}")
+    return result
+
+# Recursive factorial requires n recursive calls
+# Therefore it has a time complexity of O(2^n): exponential growth
 
 
 def recursive_factorial(n):
@@ -138,6 +172,9 @@ def generate_random_array(length):
 if __name__ == "__main__":
     recursive_factorial(100)
     memoized_factorial(100)
+    recursive_fibonacci(35)
+    iterative_fibonacci(35)
+    memoized_fibonacci(35)
     arr = generate_random_array(1000000)
     result_tuple = linear_search(arr, 255)
     print(
