@@ -22,7 +22,7 @@ class Item:
     # This is the main way to overload basic operations on Python for classes
     # __str__ is called when str() or print() is used on the object
     def __str__(self):
-        return self.display_info(self)
+        return self.display_info()
     # eq and lt are used for sorting and comparisons, just like
     # overriding Comparator interface in Java
     # __eq__ is called when == operator is used

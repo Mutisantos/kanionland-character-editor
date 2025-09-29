@@ -1,8 +1,14 @@
-from equipable_object import EquipableObject
-from partEnum import Parts
+from .equipable_object import EquipableObject
+from .partEnum import Parts
+from pydantic import Field
 
 
 class Weapon(EquipableObject):
+    strength: int = Field(0, description="Strength of the weapon", ge=1)
+    power: int = Field(0, description="Power of the weapon", ge=1)
+    range: int = Field(0, description="Range of the weapon", ge=1)
+    stealth: int = Field(0, description="Stealth of the weapon", ge=1)
+
     def __init__(
             self,
             name,

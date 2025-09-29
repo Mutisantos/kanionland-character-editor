@@ -1,15 +1,38 @@
 # Each python file is treated as a module
 # Due to that, any file can be imported with their methods and classes
-from equipable_object import EquipableObject
-from item import Item
-from armor import Armor
-from weapon import Weapon
-from partEnum import Parts
 # From-Import statement allows to import only specific elements in module
+from .equipable_object import EquipableObject
+from .item import Item
+from .armor import Armor
+from .weapon import Weapon
+from .partEnum import Parts
 from typing import Dict, Tuple, Optional
+from pydantic import BaseModel
+from pydantic import Field
 
 
-class Character:
+class Character(BaseModel):
+
+    # Class attribute definition and scope through Field declarations
+    name: str = Field(..., description="Name of the character")
+    race: str = Field(..., description="Race of the character")
+    gender: str = Field(..., description="Gender of the character")
+    age: int = Field(..., description="Age of the character")
+    weight: int = Field(..., description="Weight of the character")
+    height: int = Field(..., description="Height of the character")
+    aura: int = Field(..., description="Aura of the character")
+    money: int = Field(..., description="Money of the character")
+    title: str = Field(..., description="Title of the character")
+    hunger: int = Field(description="Character's Hunger", default=100)
+    thrist: int = Field(description="Character's Thirst", default=100)
+    sleep: int = Field(description="Character's Sleep", default=100)
+    parts: list[Parts] = Field(description="Parts of the character",
+                               default=Parts.get_basic_body())
+    inventory: Dict[str, Tuple[Item, int]] = Field(
+        description="Inventory of the character", default={})
+    equipped_items: Dict[Parts, list[EquipableObject]] = Field(
+        description="Equipped items of the character", default={})
+
     # Constructor method, where all attributes have their type defined
     def __init__(
             self,
@@ -42,8 +65,13 @@ class Character:
         self.inventory: Dict[str, Tuple[Item, int]] = {}
         self.equipped_items: Dict[Parts, list[EquipableObject]] = {}
 
+    @classmethod
+    def builder(cls) -> "CharacterBuilder":
+        from .character_builder import CharacterBuilder
+        return CharacterBuilder()
+
+    # Return a dictionary representation of the Character's attributes.
     def to_dict(self):
-        """Return a dictionary representation of the Character's attributes."""
         return self.__dict__.copy()
 
     @property

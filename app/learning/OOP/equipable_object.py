@@ -1,7 +1,16 @@
-from partEnum import Parts
+from .partEnum import Parts
+from pydantic import BaseModel
+from pydantic import Field
 
 
-class EquipableObject:
+class EquipableObject(BaseModel):
+    # Default already has empty/none values, so it's not required to do it explicitly
+    name: str = Field(..., description="Name of the item")
+    weight: int = Field(1, description="Weight of the item", ge=1)
+    part: Parts = Field(
+        Parts.TORSO, description="Part of the body where the item is equipped")
+    description: str = Field("", description="Description of the item")
+    quality: str = Field("Common", description="Quality of the item")
 
     def __init__(
             self,
