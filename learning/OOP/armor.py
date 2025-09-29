@@ -13,8 +13,10 @@ class Armor(EquipableObject):
 
     def __init__(self, name, weight, part: Parts,
                  defense, balance, spirit, stealth, description="",
-                 quality="Common"):
-        super().__init__(name, weight, part, description, quality)
+                 quality="Common",
+                 price=1):
+        super().__init__(name=name, price=price, weight=weight,
+                         part=part, description=description, quality=quality)
         self.defense = defense  # DEF
         self.balance = balance  # EQU
         self.spirit = spirit    # ESP

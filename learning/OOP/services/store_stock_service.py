@@ -1,0 +1,41 @@
+from typing import Dict
+from OOP.equipable_object import EquipableObject
+from OOP.item import Item
+
+
+class StoreStockService:
+    equipment_stock = Dict[EquipableObject, int]
+    item_stock = Dict[Item, int]
+
+    def __init__(self):
+        self.equipment_stock = {}
+        self.item_stock = {}
+
+    def has_equipement(self, item: EquipableObject, amount: int):
+        if (item in self.equipment_stock and self.equipment_stock[item] >= amount):
+            return True
+        return False
+
+    def add_item(self, item: EquipableObject, amount: int):
+        if (item in self.equipment_stock):
+            self.equipment_stock[item] += amount
+        else:
+            self.equipment_stock[item] = amount
+
+    def add_equipment(self, item: Item, amount: int):
+        if (item in self.item_stock):
+            self.item_stock[item] += amount
+        else:
+            self.item_stock[item] = amount
+
+    def sell_item(self, item: EquipableObject, amount: int):
+        if (item in self.equipment_stock and self.equipment_stock[item] >= amount):
+            self.equipment_stock[item] -= amount
+        else:
+            print("Not enough items in stock")
+
+    def sell_equipement(self, item: Item, amount: int):
+        if (item in self.item_stock and self.item_stock[item] >= amount):
+            self.item_stock[item] -= amount
+        else:
+            print("Not enough items in stock")

@@ -18,9 +18,11 @@ class Weapon(EquipableObject):
             power,
             range,
             stealth,
+            price,
             description="",
             quality="Common"):
-        super().__init__(name, weight, part, description, quality)
+        super().__init__(name=name, price=price, weight=weight,
+                         part=part, description=description, quality=quality)
         self.strength = strength  # FUE
         self.power = power        # POT
         self.stealth = stealth    # SIG

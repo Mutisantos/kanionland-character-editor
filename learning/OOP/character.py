@@ -34,36 +34,37 @@ class Character(BaseModel):
         description="Equipped items of the character", default={})
 
     # Constructor method, where all attributes have their type defined
-    def __init__(
-            self,
-            name: str,
-            race: str,
-            gender: str,
-            age: int,
-            weight: int,
-            height: int,
-            aura: int,
-            money: int,
-            title: str,
-            hunger: int,
-            thrist: int,
-            sleep: int,
-            parts: list[Parts] = Parts.get_basic_body()):
-        self.name = name
-        self.race = race
-        self.gender = gender
-        self.age = age
-        self.weight = weight
-        self.height = height
-        self.aura = aura
-        self.money = money
-        self.title = title
-        self.hunger = hunger
-        self.thrist = thrist
-        self.sleep = sleep
-        self.parts = parts
-        self.inventory: Dict[str, Tuple[Item, int]] = {}
-        self.equipped_items: Dict[Parts, list[EquipableObject]] = {}
+    # pydantic constructor is used instead of __init__
+    # def __init__(
+    #         self,
+    #         name: str,
+    #         race: str,
+    #         gender: str,
+    #         age: int,
+    #         weight: int,
+    #         height: int,
+    #         aura: int,
+    #         money: int,
+    #         title: str,
+    #         hunger: int,
+    #         thrist: int,
+    #         sleep: int,
+    #         parts: list[Parts] = Parts.get_basic_body()):
+    #     self.name = name
+    #     self.race = race
+    #     self.gender = gender
+    #     self.age = age
+    #     self.weight = weight
+    #     self.height = height
+    #     self.aura = aura
+    #     self.money = money
+    #     self.title = title
+    #     self.hunger = hunger
+    #     self.thrist = thrist
+    #     self.sleep = sleep
+    #     self.parts = parts
+    #     self.inventory: Dict[str, Tuple[Item, int]] = {}
+    #     self.equipped_items: Dict[Parts, list[EquipableObject]] = {}
 
     @classmethod
     def builder(cls) -> "CharacterBuilder":
@@ -204,7 +205,7 @@ class Character(BaseModel):
 
     def equip_item(self, equipable_item: EquipableObject):
         msg = ""
-        if equipable_item.part not in self.parts:
+        if not self.can_equip(equipable_item):
             msg = f"Cannot equip {equipable_item.name}:"
             msg += f"{self.name} doesn't have: {equipable_item.part.name}."
             return msg
@@ -215,3 +216,6 @@ class Character(BaseModel):
         msg = f"{self.name} Equipped {equipable_item.name}"
         msg += f" on {equipable_item.part.name}."
         return msg
+
+    def can_equip(self, equipable_item: EquipableObject):
+        return equipable_item.part in self.parts

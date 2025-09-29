@@ -1,10 +1,12 @@
-class Item:
-    def __init__(self, name, price, stat, modifier=0, description=""):
-        self.name = name
-        self.price = price
-        self.stat = stat
-        self.modifier = modifier
-        self.description = description
+from pydantic import BaseModel, Field
+
+
+class Item(BaseModel):
+    name: str = Field(..., description="Name of the item")
+    price: int = Field(..., description="Price of the item")
+    stat: str = Field(..., description="Stat of the item")
+    modifier: int = Field(0, description="Modifier of the item")
+    description: str = Field("", description="Description of the item")
 
     def to_dict(self):
         """Dictionary representation makes the class JSON serializable"""
