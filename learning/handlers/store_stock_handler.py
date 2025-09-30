@@ -1,6 +1,6 @@
-from app.learning.OOP.services.store_stock_service import StoreStockService
 from .chain_handler import Handler
-from app.learning.OOP.store_transaction import StoreTransaction
+from OOP.helpers.store_stock_service import StoreStockService
+from OOP.store_transaction import StoreTransaction
 
 
 class StoreStockHandler(Handler):
@@ -12,6 +12,6 @@ class StoreStockHandler(Handler):
         item = request.item
         if (self.store_stock_service.has_equipement(item, request.amount)):
             self.store_stock_service.sell_equipement(item, request.amount)
-            self._next_handler.handle(request)
+            super().handle(request)
         else:
-            print("Item out of stock")
+            print("Not enough stock for transaction")

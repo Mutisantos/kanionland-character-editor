@@ -5,6 +5,7 @@ from pydantic import Field
 
 class EquipableObject(BaseModel):
     # Default already has empty/none values, so it's not required to do it explicitly
+    id: int = Field(..., description="ID of the item")
     name: str = Field(..., description="Name of the item")
     weight: int = Field(1, description="Weight of the item", ge=1)
     part: Parts = Field(
@@ -13,6 +14,8 @@ class EquipableObject(BaseModel):
     quality: str = Field("Common", description="Quality of the item")
     price: int = Field(0, description="Price of the item")
 
+    def __hash__(self):
+        return hash(self.id)
     # Replaced by pydantic implicit init
     # def __init__(
     #         self,

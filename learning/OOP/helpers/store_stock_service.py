@@ -12,30 +12,31 @@ class StoreStockService:
         self.item_stock = {}
 
     def has_equipement(self, item: EquipableObject, amount: int):
-        if (item in self.equipment_stock and self.equipment_stock[item] >= amount):
+        if (item in self.equipment_stock.keys() and self.equipment_stock[item] >= amount):
             return True
         return False
 
-    def add_item(self, item: EquipableObject, amount: int):
-        if (item in self.equipment_stock):
+    def add_equipment(self, item: EquipableObject, amount: int):
+        if (item in self.equipment_stock.keys()):
             self.equipment_stock[item] += amount
         else:
             self.equipment_stock[item] = amount
 
-    def add_equipment(self, item: Item, amount: int):
-        if (item in self.item_stock):
+    def add_item(self, item: Item, amount: int):
+        if (item in self.item_stock.keys()):
             self.item_stock[item] += amount
         else:
             self.item_stock[item] = amount
 
     def sell_item(self, item: EquipableObject, amount: int):
-        if (item in self.equipment_stock and self.equipment_stock[item] >= amount):
+        if (item in self.equipment_stock.keys() and self.equipment_stock[item] >= amount):
             self.equipment_stock[item] -= amount
         else:
             print("Not enough items in stock")
 
     def sell_equipement(self, item: Item, amount: int):
-        if (item in self.item_stock and self.item_stock[item] >= amount):
-            self.item_stock[item] -= amount
+        if (item in self.equipment_stock.keys() and self.equipment_stock[item] >= amount):
+            self.equipment_stock[item] -= amount
+            print(f"Sold {amount} of {item.name}")
         else:
             print("Not enough items in stock")

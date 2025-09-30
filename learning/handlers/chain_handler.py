@@ -1,16 +1,16 @@
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
-from typing import Self
+from typing import Self, Optional
 
 # A class helper for creating abstract classes
 
 
 @dataclass
 class Handler[T](ABC):
-    _next_handler: Self | None = None
+    _next_handler: Optional[Self] = None
 
     def set_next(self, next_handler: Self) -> Self:
-        self.next_handler = next_handler
+        self._next_handler = next_handler
         return next_handler
 
     # As a chain of responsability, the element must handle the request

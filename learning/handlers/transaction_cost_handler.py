@@ -1,6 +1,6 @@
-from learning.OOP.store_transaction import StoreTransaction
-from learning.OOP.services.taxing_service import TaxingService
-from learning.datastructures.handlers.chain_handler import Handler
+from .chain_handler import Handler
+from OOP.store_transaction import StoreTransaction
+from OOP.helpers.taxing_service import TaxingService
 
 
 class TransactionCostHandler(Handler):
@@ -10,8 +10,8 @@ class TransactionCostHandler(Handler):
         request.net_price = item.price
         request.tax = tax
         request.total_price = request.net_price + request.net_price * tax
-        self._next_handler.handle(request)
         print(f"Got {request.total_price}$ from {request.amount} {item.name}")
+        super().handle(request)
 
 
 if __name__ == "__main__":

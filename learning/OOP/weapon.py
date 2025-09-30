@@ -2,6 +2,10 @@ from .equipable_object import EquipableObject
 from .partEnum import Parts
 from pydantic import Field
 
+# This approach sets the class as inmutable
+# State will remain read-only after initialization
+# @dataclass(frozen=True)
+
 
 class Weapon(EquipableObject):
     strength: int = Field(0, description="Strength of the weapon", ge=1)
@@ -11,6 +15,7 @@ class Weapon(EquipableObject):
 
     def __init__(
             self,
+            id,
             name,
             weight,
             part: Parts,
@@ -21,7 +26,7 @@ class Weapon(EquipableObject):
             price,
             description="",
             quality="Common"):
-        super().__init__(name=name, price=price, weight=weight,
+        super().__init__(id=id, name=name, price=price, weight=weight,
                          part=part, description=description, quality=quality)
         self.strength = strength  # FUE
         self.power = power        # POT
@@ -42,3 +47,6 @@ class Weapon(EquipableObject):
         info = "---- ES UN ARMA! ---- \n"
         info += self._display_base_info()
         return info
+
+    def __hash__(self):
+        return hash(self.id)
