@@ -44,5 +44,6 @@ if __name__ == "__main__":
     transaction_cost_handler.set_next(None)
     store_stock_handler.set_next(transaction_cost_handler)
     character_equip_handler.set_next(store_stock_handler)
+    # First handler will be the entrypoint of the chain
     # Must go character handler -> store stock handler -> transaction cost handler
     character_equip_handler.handle(store_transaction)
