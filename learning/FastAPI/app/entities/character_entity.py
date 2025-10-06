@@ -1,6 +1,5 @@
 from sqlmodel import SQLModel, Field
 from uuid import UUID, uuid4
-from models.race_enum import Race
 
 # In order to operate over databases using SQLModel, a new class representing the table must exist.
 # This class is separated from the model class as a decoupled solution following the SOLID principles

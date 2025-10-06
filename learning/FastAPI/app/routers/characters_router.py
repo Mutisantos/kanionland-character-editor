@@ -1,34 +1,24 @@
-# The entrypoint for FastAPI applications
-# Usage of uvicorn will allow hosting the python application as a web server
-from datetime import datetime
-from zoneinfo import ZoneInfo
-from fastapi import FastAPI, HTTPException, status
+# Routers will be the equivalent of controllers in Spring
+# Endpoints must hold a tag stating the domain/resource they are handling, so they can be grouped
 from uuid import uuid4
-from fastapi import Depends
-from sqlalchemy.exc import IntegrityError, NoResultFound
-from models.character import Character
-from databases.character_repository import CharacterRepository
-from databases.sqlite_connection import create_all_tables, SessionDependency
+from sqlalchemy.exc import IntegrityError
+from fastapi import APIRouter, HTTPException, status, Depends
+from ..models.character import Character
+from ..repositories.character_repository import CharacterRepository
+from ..repositories.sqlite_connection import create_all_tables
 
-app = FastAPI(lifespan=create_all_tables)
+router = APIRouter()
 
 # Decorator defines the endpoint action and path for the function
 
 
-@app.get("/")
-def read_root():
-    char_a = Character(name="Gazz Leudos", race="Kanion", gender="M", age=21, weight=42, height=90,
-                       aura=430, money=2500, title="Frost Knight", hunger=100, thirst=100, sleep=100)
-    return {"Message": "Hello Worlds", "Character": char_a}
-
-
-@app.get("/characters")
+@router.get("/characters", tags=["characters"])
 def get_all_characters(repo: CharacterRepository = Depends(CharacterRepository)):
     return repo.get_all_characters()
 
 
 # As a difference from Spring approach, dependencies are solved on runtime
-@app.post("/characters", status_code=status.HTTP_201_CREATED)
+@router.post("/characters", status_code=status.HTTP_201_CREATED, tags=["characters"])
 def create_character(json_character: dict, repo: CharacterRepository = Depends(CharacterRepository)):
     try:
         char_a = Character.model_validate(json_character)
@@ -53,7 +43,7 @@ def create_character(json_character: dict, repo: CharacterRepository = Depends(C
         )
 
 
-@app.get("/characters/{name}")
+@router.get("/characters/{name}", tags=["characters"])
 def get_character_by_name(
     name: str,
     repo: CharacterRepository = Depends(CharacterRepository)
@@ -61,7 +51,7 @@ def get_character_by_name(
     return repo.get_character_by_name(name)
 
 
-@app.delete("/characters/{name}")
+@router.delete("/characters/{name}", tags=["characters"])
 def delete_character_by_name(
     name: str,
     repo: CharacterRepository = Depends(CharacterRepository)
@@ -69,7 +59,7 @@ def delete_character_by_name(
     return repo.delete_character_by_name(name)
 
 
-@app.patch("/characters/{name}", status_code=status.HTTP_200_OK)
+@router.patch("/characters/{name}", status_code=status.HTTP_200_OK, tags=["characters"])
 def update_character_by_name(
     name: str,
     json_character: dict,
@@ -77,27 +67,6 @@ def update_character_by_name(
 ):
     return repo.patch_character_by_name(name, json_character)
 
-
-@app.get("/time/{iso_code}")
-# Parameters either pathvariables or queryparameters must be type-safe
-def read_time(iso_code: str = "CO"):
-    country_code = iso_code.upper()
-    timezone_str = __country_timezones.get(country_code)
-    if not timezone_str:
-        return {"Error": "Invalid ISO code"}
-    tz = ZoneInfo(timezone_str)
-    return {"Time": datetime.now(tz)}
-
-
-__country_timezones = {
-    "CO": "America/Bogota",
-    "MX": "America/Mexico_City",
-    "US": "America/New_York",
-    "AR": "America/Argentina/Buenos_Aires",
-    "CL": "America/Santiago",
-    "PE": "America/Lima",
-    "ES": "Europe/Madrid"
-}
 
 # Executed with the script fastapi dev/run (switched between Development and Production modes)
 # Development mode allows hot-swapping every time a change is made to the code

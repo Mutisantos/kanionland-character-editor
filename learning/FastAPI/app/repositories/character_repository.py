@@ -2,10 +2,10 @@
 from uuid import UUID
 
 from fastapi import HTTPException, status
-from .sqlite_connection import SessionDependency
-from entities.character_entity import CharacterEntity
-from models.character import Character
 from sqlmodel import select
+from .sqlite_connection import SessionDependency
+from ..entities.character_entity import CharacterEntity
+from ..models.character import Character
 
 
 class CharacterRepository:
