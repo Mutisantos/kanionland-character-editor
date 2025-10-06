@@ -1,11 +1,11 @@
+from learning.basics import TaxingService
+from learning.basics.OOP import StoreTransaction
 from .chain_handler import Handler
-from OOP.store_transaction import StoreTransaction
-from OOP.helpers.taxing_service import TaxingService
 
 
 class TransactionCostHandler(Handler):
     def handle(self, request: StoreTransaction) -> None:
-        item = request.item
+        item = request.equipable_object
         tax = TaxingService().calculate_tax(item)
         request.net_price = item.price
         request.tax = tax

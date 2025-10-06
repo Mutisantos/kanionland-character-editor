@@ -1,4 +1,4 @@
-from OOP.equipable_object import EquipableObject
+from learning.basics.OOP import EquipableObject
 
 
 class TaxingService:
@@ -12,7 +12,7 @@ class TaxingService:
             "Default": 0.15
         }
 
-    def calculate_tax(self, item: EquipableObject) -> int:
-        if (item.quality in self.tax_rates):
+    def calculate_tax(self, item: EquipableObject) -> float:
+        if item.quality in self.tax_rates:
             return item.price * self.tax_rates[item.quality]
         return item.price * self.tax_rates["Default"]

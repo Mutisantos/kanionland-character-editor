@@ -1,6 +1,6 @@
 from .chain_handler import Handler
-from OOP.helpers.store_stock_service import StoreStockService
-from OOP.store_transaction import StoreTransaction
+from .. import StoreStockService
+from ..OOP import StoreTransaction
 
 
 class StoreStockHandler(Handler):
@@ -9,9 +9,9 @@ class StoreStockHandler(Handler):
         self.store_stock_service = store_stock_service
 
     def handle(self, request: StoreTransaction) -> None:
-        item = request.item
-        if (self.store_stock_service.has_equipement(item, request.amount)):
-            self.store_stock_service.sell_equipement(item, request.amount)
+        eq_object = request.equipable_object
+        if self.store_stock_service.has_equipement(eq_object, request.amount):
+            self.store_stock_service.sell_equipment(eq_object, request.amount)
             super().handle(request)
         else:
             print("Not enough stock for transaction")
