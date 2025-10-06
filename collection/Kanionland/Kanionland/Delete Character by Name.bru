@@ -1,0 +1,23 @@
+meta {
+  name: Delete Character by Name
+  type: http
+  seq: 4
+}
+
+delete {
+  url: http://127.0.0.1:8000/characters/:name
+  body: none
+  auth: inherit
+}
+
+params:path {
+  name: a
+}
+
+headers {
+  accept: application/json
+}
+
+settings {
+  encodeUrl: false
+}

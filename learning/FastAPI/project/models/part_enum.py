@@ -12,6 +12,12 @@ class BodyPart(str, Enum):
     TAIL = "Tail"
     LEFT_EAR_ARM = "Left Ear-Arm"
     RIGHT_EAR_ARM = "Right Ear-Arm"
+    LEFT_WING = "Left Wing"
+    RIGHT_WING = "Right Wing"
+    ENERGY_CORE = "Energy Core"
+    SKETCHE_BASE = "Sketche Base"
+    EQUINE_TORSO = "Equine Torso"
+    TENTACLE = "Tentacle"
 
     @property
     def max_health(self) -> int:
@@ -25,7 +31,11 @@ class BodyPart(str, Enum):
             "Right Leg": 20,
             "Tail": 30,
             "Left Ear-Arm": 35,
-            "Right Ear-Arm": 35
+            "Right Ear-Arm": 35,
+            "Left Wing": 20,
+            "Right Wing": 20,
+            "Energy Core": 100,
+            "Sketche Base": 100
         }
         return health_map[self.value]
 

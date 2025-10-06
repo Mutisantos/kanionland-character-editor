@@ -1,0 +1,49 @@
+meta {
+  name: Create Character
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://127.0.0.1:8000/characters
+  body: json
+  auth: inherit
+}
+
+headers {
+  accept: application/json
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "name": "Mayuc",
+    "race": "Pumiblu",
+    "gender": "Female",
+    "age": 12,
+    "weight": 12,
+    "height": 112,
+    "aura": 390,
+    "money": 5000,
+    "title": "Salvajita",
+    "hunger": 100,
+    "thirst": 100,
+    "sleep": 100,
+    "parts": [
+      "Head",
+      "Left Arm",
+      "Right Arm",
+      "Torso",
+      "Left Leg",
+      "Right Leg",
+      "Left Ear-arm",
+      "Left Ear-arm",
+    ],
+    "inventory": {},
+    "equipped_items": {}
+  }
+}
+
+settings {
+  encodeUrl: false
+}

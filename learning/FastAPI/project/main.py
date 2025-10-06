@@ -2,9 +2,10 @@
 # Usage of uvicorn will allow hosting the python application as a web server
 from datetime import datetime
 from zoneinfo import ZoneInfo
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException, status
 from uuid import uuid4
 from fastapi import Depends
+from sqlalchemy.exc import IntegrityError, NoResultFound
 from models.character import Character
 from databases.character_repository import CharacterRepository
 from databases.sqlite_connection import create_all_tables, SessionDependency
@@ -21,6 +22,62 @@ def read_root():
     return {"Message": "Hello Worlds", "Character": char_a}
 
 
+@app.get("/characters")
+def get_all_characters(repo: CharacterRepository = Depends(CharacterRepository)):
+    return repo.get_all_characters()
+
+
+# As a difference from Spring approach, dependencies are solved on runtime
+@app.post("/characters", status_code=status.HTTP_201_CREATED)
+def create_character(json_character: dict, repo: CharacterRepository = Depends(CharacterRepository)):
+    try:
+        char_a = Character.model_validate(json_character)
+        char_a.char_id = uuid4()
+        repo.create_character(char_a)
+        return {"Character": char_a, "id": str(char_a.char_id)}
+    except ValueError as e:
+        exception_params = e.errors()[0]
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Error at Field: {exception_params['loc'][0].upper()}: {exception_params['msg']}"
+        )
+    except IntegrityError as e:
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT,
+            detail=f"Error while creating Character: {str(e.__cause__)}"
+        )
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error while creating Character: {str(e)}"
+        )
+
+
+@app.get("/characters/{name}")
+def get_character_by_name(
+    name: str,
+    repo: CharacterRepository = Depends(CharacterRepository)
+):
+    return repo.get_character_by_name(name)
+
+
+@app.delete("/characters/{name}")
+def delete_character_by_name(
+    name: str,
+    repo: CharacterRepository = Depends(CharacterRepository)
+):
+    return repo.delete_character_by_name(name)
+
+
+@app.patch("/characters/{name}", status_code=status.HTTP_200_OK)
+def update_character_by_name(
+    name: str,
+    json_character: dict,
+    repo: CharacterRepository = Depends(CharacterRepository)
+):
+    return repo.patch_character_by_name(name, json_character)
+
+
 @app.get("/time/{iso_code}")
 # Parameters either pathvariables or queryparameters must be type-safe
 def read_time(iso_code: str = "CO"):
@@ -30,33 +87,6 @@ def read_time(iso_code: str = "CO"):
         return {"Error": "Invalid ISO code"}
     tz = ZoneInfo(timezone_str)
     return {"Time": datetime.now(tz)}
-
-
-@app.get("/characters")
-def get_all_characters(repo: CharacterRepository = Depends(CharacterRepository)):
-    return repo.get_all_characters()
-
-# As a difference from Spring approach, dependencies are solved on runtime
-
-
-@app.post("/characters")
-def create_character(json_character: dict, repo: CharacterRepository = Depends(CharacterRepository)):
-    try:
-        char_a = Character.model_validate(json_character)
-    except ValueError as e:
-        exception_params = e.errors()[0]
-        return f"Error at Field: {exception_params["loc"][0].upper()}: {exception_params["msg"]}"
-    char_a.char_id = uuid4()
-    repo.create_character(char_a)
-    return {"Character": char_a}
-
-
-@app.get("/characters/{name}")
-def get_character_by_name(
-    name: str,
-    repo: CharacterRepository = Depends(CharacterRepository)
-):
-    return repo.get_character_by_name(name)
 
 
 __country_timezones = {

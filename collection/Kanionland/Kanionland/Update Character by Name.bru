@@ -1,0 +1,31 @@
+meta {
+  name: Update Character by Name
+  type: http
+  seq: 5
+}
+
+patch {
+  url: http://127.0.0.1:8000/characters/:name
+  body: json
+  auth: inherit
+}
+
+params:path {
+  name: Mayu
+}
+
+headers {
+  accept: application/json
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "money": 5200,
+    "race": "Orthyss"
+  }
+}
+
+settings {
+  encodeUrl: false
+}

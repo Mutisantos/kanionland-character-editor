@@ -19,17 +19,19 @@ class Character(BaseModel):
     char_id: UUID | None = Field(
         description="ID of the character", default=None)
     name: str = Field(..., description="Name of the character")
+    # Race won't have a default value as it is required and valid
     race: Race = Field(..., description="Race of the character")
     gender: str = Field(..., description="Gender of the character")
-    age: int = Field(1, description="Age of the character")
-    weight: int = Field(1, description="Weight of the character")
-    height: int = Field(1, description="Height of the character")
-    aura: int = Field(0, description="Aura of the character")
-    money: int = Field(0, description="Money of the character")
+    age: int = Field(1, description="Age of the character", ge=1)
+    weight: int = Field(1, description="Weight of the character", ge=1)
+    height: int = Field(1, description="Height of the character", ge=1)
+    aura: int = Field(0, description="Aura of the character", ge=0)
+    money: int = Field(0, description="Money of the character", ge=0)
     title: str = Field("", description="Title of the character")
-    hunger: int = Field(100, description="Character's Hunger")
-    thirst: int = Field(100, description="Character's Thirst")
-    sleep: int = Field(100, description="Character's Sleep")
+    hunger: int = Field(100, description="Character's Hunger", ge=0, le=100)
+    thirst: int = Field(100, description="Character's Thirst", ge=0, le=100)
+    sleep: int = Field(100, description="Character's Sleep", ge=0, le=100)
+    # If the list is provided, the elements must belong to the BodyPart enum
     parts: list[BodyPart] = Field(description="Parts of the character",
                                   default=BodyPart.get_basic_body())
     inventory: Dict[str, Tuple[Item, int]] = Field(
