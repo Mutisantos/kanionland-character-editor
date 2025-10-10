@@ -3,6 +3,7 @@ Character Builder Class
 """
 from typing import Optional
 from .part_enum import Parts
+from .character import Character
 
 
 class CharacterBuilder:
@@ -10,6 +11,9 @@ class CharacterBuilder:
         self._name: str = None
         self._race: str = None
         self._gender: str = None
+        self._age: int = 1
+        self._weight: int = 1
+        self._height: int = 1
         self._aura: int = 0
         self._money: int = 0
         self._title: str = None
@@ -19,19 +23,57 @@ class CharacterBuilder:
         self._parts: Optional[list[Parts]] = None
 
     # Building methods for each attribute
-    def name(self, v: str): self._name = v; return self
-    def race(self, v: str): self._race = v; return self
-    def gender(self, v: str): self._gender = v; return self
-    def age(self, v: int): self._age = v; return self
-    def weight(self, v: int): self._weight = v; return self
-    def height(self, v: int): self._height = v; return self
-    def aura(self, v: int): self._aura = v; return self
-    def money(self, v: int): self._money = v; return self
-    def title(self, v: str): self._title = v; return self
-    def hunger(self, v: int): self._hunger = v; return self
-    def thrist(self, v: int): self._thrist = v; return self
-    def sleep(self, v: int): self._sleep = v; return self
-    def parts(self, v: list[Parts]): self._parts = v; return self
+    def name(self, v: str):
+        self._name = v
+        return self
+
+    def race(self, v: str):
+        self._race = v
+        return self
+
+    def gender(self, v: str):
+        self._gender = v
+        return self
+
+    def age(self, v: int):
+        self._age = v
+        return self
+
+    def weight(self, v: int):
+        self._weight = v
+        return self
+
+    def height(self, v: int):
+        self._height = v
+        return self
+
+    def aura(self, v: int):
+        self._aura = v
+        return self
+
+    def money(self, v: int):
+        self._money = v
+        return self
+
+    def title(self, v: str):
+        self._title = v
+        return self
+
+    def hunger(self, v: int):
+        self._hunger = v
+        return self
+
+    def thrist(self, v: int):
+        self._thrist = v
+        return self
+
+    def sleep(self, v: int):
+        self._sleep = v
+        return self
+
+    def parts(self, v: list[Parts]):
+        self._parts = v
+        return self
 
     # Optional: seed from an existing Character (copy-builder)
     @classmethod
