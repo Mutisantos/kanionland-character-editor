@@ -62,5 +62,31 @@ jobs:
         fi
 
     - name: Run pylint analysis
+      id: pylint
+      continue-on-error: true
       run: |
-        pylint $(git ls-files '*.py')
+        # Run pylint and capture the score
+        SCORE=$(pylint --exit-zero $(git ls-files '*.py') | grep -oP '(?<=Your code has been rated at ).*?(?=/10)' || true)
+        
+        # If no score is found, default to 0
+        if [ -z "$SCORE" ]; then
+          echo "No pylint score generated. Setting to 0."
+          SCORE=0
+        fi
+        
+        # Set the score as an output
+        echo "score=$SCORE" >> $GITHUB_OUTPUT
+        
+        # Check if score is below threshold (8.0)
+        if (( $(echo "$SCORE < 8.0" | bc -l) )); then
+          echo "::error::Pylint score of $SCORE/10 is below the required minimum of 8.0"
+          exit 1
+        else
+          echo "Pylint score of $SCORE/10 meets the minimum requirement of 8.0"
+        fi
+    
+    - name: Check pylint score
+      if: steps.pylint.outcome == 'failure'
+      run: |
+        echo "Pylint score check failed. Please fix the issues to meet the minimum score of 8.0."
+        exit 1
