@@ -1,10 +1,8 @@
 name: Python Linting and Auto-fix
 
 on:
-  push:
-    branches: [ main ]
   pull_request:
-    branches: [ main ]
+    branches: [ "*" ]  # Runs on all branches
   workflow_dispatch:
 
 jobs:
@@ -65,8 +63,9 @@ jobs:
       id: pylint
       continue-on-error: true
       run: |
-        # Run pylint and capture the score
-        SCORE=$(pylint --exit-zero $(git ls-files '*.py') | grep -oP '(?<=Your code has been rated at ).*?(?=/10)' || true)
+        # Run pylint and capture both score and full report
+        PYLINT_REPORT=$(pylint --exit-zero --output-format=text $(git ls-files '*.py') || true)
+        SCORE=$(echo "$PYLINT_REPORT" | grep -oP '(?<=Your code has been rated at ).*?(?=/10)' | tail -1 || true)
         
         # If no score is found, default to 0
         if [ -z "$SCORE" ]; then
@@ -74,19 +73,61 @@ jobs:
           SCORE=0
         fi
         
-        # Set the score as an output
+        # Save the full report to a file for later use
+        echo "$PYLINT_REPORT" > pylint-report.txt
+        
+        # Set the outputs
         echo "score=$SCORE" >> $GITHUB_OUTPUT
+        echo "report=$PYLINT_REPORT" >> $GITHUB_OUTPUT
         
         # Check if score is below threshold (8.0)
         if (( $(echo "$SCORE < 8.0" | bc -l) )); then
           echo "::error::Pylint score of $SCORE/10 is below the required minimum of 8.0"
+          # Create a JSON file with the score and report
+          echo '{"score":'$SCORE',"report":"'${PYLINT_REPORT//"/\\"}'"}' > pylint-results.json
+          echo "pylint-failed=true" >> $GITHUB_OUTPUT
           exit 1
         else
           echo "Pylint score of $SCORE/10 meets the minimum requirement of 8.0"
+          echo "pylint-failed=false" >> $GITHUB_OUTPUT
         fi
     
-    - name: Check pylint score
-      if: steps.pylint.outcome == 'failure'
+    - name: Comment on PR if score is low
+      if: steps.pylint.outputs.pylint-failed == 'true' && github.event_name == 'pull_request'
+      uses: actions/github-script@v6
+      with:
+        script: |
+          const fs = require('fs');
+          const report = fs.readFileSync('pylint-report.txt', 'utf8');
+          
+          // Format the report to show only the issues
+          const issues = report.split('\n')
+            .filter(line => line.includes(':') && !line.includes('Your code has been rated'))
+            .map(line => `- ${line}`)
+            .join('\n');
+          
+          const score = fs.readFileSync('pylint-results.json', 'utf8')
+            .then(data => JSON.parse(data).score)
+            .catch(() => 'N/A');
+          
+          const comment = `⚠️ **Pylint Score Check Failed** ⚠️
+          
+          Your code has a pylint score of ${score}/10, which is below the required minimum of 8.0.
+          
+          **Issues found:**
+          ${issues || 'No specific issues found, but the score is still too low.'}
+          
+          Please fix these issues to improve your code quality.`;
+          
+          await github.rest.issues.createComment({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            issue_number: context.issue.number,
+            body: comment
+          });
+    
+    - name: Fail if score is too low
+      if: steps.pylint.outputs.pylint-failed == 'true'
       run: |
-        echo "Pylint score check failed. Please fix the issues to meet the minimum score of 8.0."
+        echo "Pylint score check failed. Please check the PR comments for details."
         exit 1
