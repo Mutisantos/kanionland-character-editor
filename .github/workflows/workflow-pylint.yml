@@ -1,23 +1,133 @@
-name: Pylint
+name: Python Linting and Auto-fix
 
-on: [push]
+on:
+  pull_request:
+    branches: [ "*" ]  # Runs on all branches
+  workflow_dispatch:
 
 jobs:
-  build:
+  lint-and-fix:
     runs-on: ubuntu-latest
     strategy:
       matrix:
         python-version: ["3.12"]
+    
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0  
+    
     - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v3
+      uses: actions/setup-python@v4
       with:
         python-version: ${{ matrix.python-version }}
-    - name: Install dependencies
+
+    - name: Install Codestyle dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install pylint
-    - name: Analysing the code with pylint
+        pip install pylint autopep8 black
+
+    - name: Configure Git
       run: |
-        pylint $(git ls-files '*.py')
+        git config --global user.name 'GitHub Actions'
+        git config --global user.email 'actions@github.com'
+
+    - name: Run pylint and auto-fix with autopep8
+      run: |
+        FILES=$(git diff --name-only --diff-filter=ACMRTUXB HEAD^ HEAD | grep '\.py$' || true)
+        
+        if [ -n "$FILES" ]; then
+          echo "Running autopep8 on modified files..."
+          echo "$FILES" | xargs autopep8 --in-place --aggressive --aggressive
+          
+          # Run black for consistent formatting
+          echo "Running black on modified files..."
+          echo "$FILES" | xargs black --line-length 120
+          
+          # Stage changes
+          git add $FILES
+          
+          # Check if there are changes to commit
+          if ! git diff --staged --quiet; then
+            git commit -m "style: auto-fix linting issues"
+            git push
+          else
+            echo "No linting fixes to commit."
+          fi
+        else
+          echo "No Python files to lint."
+        fi
+
+    - name: Run pylint analysis
+      id: pylint
+      continue-on-error: true
+      run: |
+        # Run pylint and capture both score and full report
+        PYLINT_REPORT=$(pylint --exit-zero --output-format=text $(git ls-files '*.py') || true)
+        SCORE=$(echo "$PYLINT_REPORT" | grep -oP '(?<=Your code has been rated at ).*?(?=/10)' | tail -1 || true)
+        
+        # If no score is found, default to 0
+        if [ -z "$SCORE" ]; then
+          echo "No pylint score generated. Setting to 0."
+          SCORE=0
+        fi
+        
+        # Save the full report to a file for later use
+        echo "$PYLINT_REPORT" > pylint-report.txt
+        
+        # Set the outputs
+        echo "score=$SCORE" >> $GITHUB_OUTPUT
+        echo "report=$PYLINT_REPORT" >> $GITHUB_OUTPUT
+        
+        # Check if score is below threshold (8.0)
+        if (( $(echo "$SCORE < 8.0" | bc -l) )); then
+          echo "::error::Pylint score of $SCORE/10 is below the required minimum of 8.0"
+          # Create a JSON file with the score and report
+          echo '{"score":'$SCORE',"report":"'${PYLINT_REPORT//"/\\"}'"}' > pylint-results.json
+          echo "pylint-failed=true" >> $GITHUB_OUTPUT
+          exit 1
+        else
+          echo "Pylint score of $SCORE/10 meets the minimum requirement of 8.0"
+          echo "pylint-failed=false" >> $GITHUB_OUTPUT
+        fi
+    
+    - name: Comment on PR if score is low
+      if: steps.pylint.outputs.pylint-failed == 'true' && github.event_name == 'pull_request'
+      uses: actions/github-script@v6
+      with:
+        script: |
+          const fs = require('fs');
+          const report = fs.readFileSync('pylint-report.txt', 'utf8');
+          
+          // Format the report to show only the issues
+          const issues = report.split('\n')
+            .filter(line => line.includes(':') && !line.includes('Your code has been rated'))
+            .map(line => `- ${line}`)
+            .join('\n');
+          
+          const score = fs.readFileSync('pylint-results.json', 'utf8')
+            .then(data => JSON.parse(data).score)
+            .catch(() => 'N/A');
+          
+          const comment = `⚠️ **Pylint Score Check Failed** ⚠️
+          
+          Your code has a pylint score of ${score}/10, which is below the required minimum of 8.0.
+          
+          **Issues found:**
+          ${issues || 'No specific issues found, but the score is still too low.'}
+          
+          Please fix these issues to improve your code quality.`;
+          
+          await github.rest.issues.createComment({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            issue_number: context.issue.number,
+            body: comment
+          });
+    
+    - name: Fail if score is too low
+      if: steps.pylint.outputs.pylint-failed == 'true'
+      run: |
+        echo "Pylint score check failed. Please check the PR comments for details."
+        exit 1

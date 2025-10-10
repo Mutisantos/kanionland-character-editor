@@ -1,6 +1,6 @@
 from sqlmodel import Relationship, SQLModel, Field
 from uuid import UUID, uuid4
-from typing import TYPE_CHECKING, Optional
+from typing import Optional
 from .character_rank_entity import CharacterRankEntity
 
 

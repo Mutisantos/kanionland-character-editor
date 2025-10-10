@@ -45,11 +45,11 @@ class BodyPart(str, Enum):
 
     @staticmethod
     # With Union, the method can return either a Parts or None
-    def get_enum_by_name(name: str) -> Union['Parts', None]:
+    def get_enum_by_name(name: str) -> Union['BodyPart', None]:
         # next method works as a findFirst in java streams
-        return next(filter(lambda part: part.name == name, Parts), None)
+        return next(filter(lambda part: part.name == name, BodyPart), None)
         # The compression list alternative uses a for cycle
-        # return next((part for part in Parts if part.name == name), None)
+        # return next((part for part in BodyPart if part.name == name), None)
 
     @staticmethod
     def get_basic_body():

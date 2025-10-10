@@ -7,10 +7,11 @@ from .item import Item
 from .armor import Armor
 from .weapon import Weapon
 from .part_enum import BodyPart
+from .character_builder import CharacterBuilder
 from typing import Dict, Tuple, Optional
 from pydantic import BaseModel
 from pydantic import Field
-from uuid import UUID, uuid4
+from uuid import UUID
 
 
 class Character(BaseModel):
@@ -81,10 +82,6 @@ class Character(BaseModel):
     def to_dict(self):
         return self.__dict__.copy()
 
-    @property
-    def aura(self) -> int:
-        return self._aura
-
     @aura.setter
     # Using setter method as validations are performed on assignment
     def aura(self, value: int):
@@ -97,12 +94,6 @@ class Character(BaseModel):
             raise ValueError("Aura cannot be lowered")
         self._aura = value
 
-    @aura.deleter
-    # Using deleter decorator, blocking "del" python operation
-    def aura(self):
-        raise AttributeError("Aura cannot be deleted")
-
-    # Arrow notation states which type the method returns
     def display_info(self) -> str:
         info = f"Name: {self.name}\n"
         info += f"The: {self.title}\n"
@@ -198,9 +189,9 @@ class Character(BaseModel):
             for item in items:
                 equipped_list += item.display_info()
                 if (isinstance(item, Armor)):
-                    equipped_list += f"Tipo: Armadura\n"
+                    equipped_list += "Tipo: Armadura\n"
                 elif (isinstance(item, Weapon)):
-                    equipped_list += f":Es un arma!\n"
+                    equipped_list += "Es un arma!\n"
         return equipped_list
 
     # Method docstring uses triple quotes

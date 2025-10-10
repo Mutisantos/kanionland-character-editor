@@ -1,20 +1,16 @@
 # Routers will be the equivalent of controllers in Spring
 # Endpoints must hold a tag stating the domain/resource they are handling, so they can be grouped
-from uuid import uuid4
-from sqlalchemy.exc import IntegrityError
-from fastapi import APIRouter, HTTPException, status, Depends
-from ..models.character import Character
-from ..repositories.character_repository import CharacterRepository
-from ..repositories.sqlite_connection import create_all_tables
+from fastapi import APIRouter, Depends
+from ..repositories.rank_repository import RankRepository
 
 router = APIRouter()
 
 # Decorator defines the endpoint action and path for the function
 
 
-@router.get("/character-ranks", tags=["characters"])
-def get_all_ranks(repo: CharacterRepository = Depends(CharacterRepository)):
-    return repo.get_all_characters()
+@router.get("/character-ranks", tags=["ranks"])
+def get_all_ranks(repo: RankRepository = Depends(RankRepository)):
+    return repo.get_all_ranks()
 
 
 # Executed with the script fastapi dev/run (switched between Development and Production modes)

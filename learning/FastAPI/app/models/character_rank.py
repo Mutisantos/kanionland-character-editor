@@ -10,7 +10,7 @@ from .part_enum import BodyPart
 from typing import Dict, Tuple, Optional
 from pydantic import BaseModel
 from pydantic import Field
-from uuid import UUID, uuid4
+from uuid import UUID
 
 
 class Character(BaseModel):

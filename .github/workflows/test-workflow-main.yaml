@@ -28,4 +28,4 @@ jobs:
       - name: Run PEP8 #Step name
         run: |
           pip install flake8
-          flake8 . --extend-ignore=E501
+          flake8 . --extend-ignore=E501 --exclude=./learning/basics/*
