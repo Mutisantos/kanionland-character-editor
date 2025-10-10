@@ -2,7 +2,7 @@ from typing import Annotated
 from fastapi import Depends, FastAPI
 from sqlmodel import SQLModel, Session, create_engine
 
-sqlite_name = "kanionland.sqlite3"
+sqlite_name = "kanionlandv2.sqlite3"
 sqlite_url = f"sqlite:///{sqlite_name}"
 
 db_engine = create_engine(sqlite_url, connect_args={

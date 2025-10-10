@@ -1,0 +1,31 @@
+name: test-workflow-main # Workflow name
+
+on: [push] #List of events on github to trigger the workflow
+
+jobs:
+  test-workflow-main:
+    runs-on: ubuntu-latest # OS where the job will be executed
+    steps: #List of steps of the job test-workflow-main
+      - name: Public IP #Step name
+        id: ip #identifier usable inside the job for other steps
+        uses: haythem/public-ip@v1.3 #Uses the action haythem/public-ip
+      
+      - name: Hola mundo #Segundo step de nombre Hola mundo
+        run: echo "¡Hola Mundo desde ${{ steps.ip.outputs.ipv4 }}!" #bash
+  test-workflow-python-pep8:
+    runs-on: ubuntu-latest # OS where the job will be executed
+    steps: 
+      - name: Checkout #Step name
+        uses: actions/checkout@v4 #Uses the action actions/checkout@v4
+      - name: Set up Python #Step name
+        uses: actions/setup-python@v4 #Uses the action actions/setup-python@v4
+        with:
+          python-version: '3.12'
+      - name: Install dependencies #Step name
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Run PEP8 #Step name
+        run: |
+          pip install flake8
+          flake8 .
